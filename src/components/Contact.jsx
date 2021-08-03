@@ -2,6 +2,11 @@ import React from 'react'
 import ContactForm from './ContactForm'
 
 export default function Contact() {
+
+    const veriEkle = nesne => {
+        console.log(nesne);
+    }
+
     return (
         <div>
             <div className="jumbotron">
@@ -13,7 +18,7 @@ export default function Contact() {
             </div>
             <div className="row">
                 <div className="col-md-5">
-                    <ContactForm />
+                    <ContactForm ekle={veriEkle} />
                 </div>
                 <div className="col-md-7">
                     İletişim bilgileri listesi

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function ContactForm() {
+export default function ContactForm(props) {
 
     const formAlanlar = {
         isim: '',
@@ -23,7 +23,8 @@ export default function ContactForm() {
 
     const verileriKaydet = (e) => {
         e.preventDefault();
-        console.log(alanlar)
+        //console.log(alanlar)
+        props.ekle(alanlar);
     }
 
     return (
