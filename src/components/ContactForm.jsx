@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function ContactForm(props) {
 
@@ -10,6 +10,18 @@ export default function ContactForm(props) {
     }
 
     const [alanlar, setAlanlar] = useState(formAlanlar);
+
+    useEffect(() => {
+        if (props.currentId == '') {
+            setAlanlar({
+                ...formAlanlar
+            })
+        } else {
+            setAlanlar({
+                ...props.iletisimVeriler[props.currentId]
+            })
+        }
+    }, [props.currentId, props.iletisimVeriler])
 
     const alanlarDegisti = (e) => {
         var alanIsim = e.target.name;
@@ -24,7 +36,7 @@ export default function ContactForm(props) {
     const verileriKaydet = (e) => {
         e.preventDefault();
         //console.log(alanlar)
-        props.ekle(alanlar);
+        props.veriEkle(alanlar);
     }
 
     return (
@@ -35,7 +47,7 @@ export default function ContactForm(props) {
                         <i className="fas fa-user"></i>
                     </div>
                 </div>
-                <input className="form-control" onChange={alanlarDegisti} name="isim" placeholder="İsim giriniz" />
+                <input className="form-control" onChange={alanlarDegisti} name="isim" placeholder="İsim giriniz" value={alanlar.isim || ""} />
             </div>
             <div className="form-group input-group">
                 <div className="input-group-prepend">
@@ -43,7 +55,7 @@ export default function ContactForm(props) {
                         <i className="fas fa-user"></i>
                     </div>
                 </div>
-                <input className="form-control" onChange={alanlarDegisti} name="soyisim" placeholder="Soyisim giriniz" />
+                <input className="form-control" onChange={alanlarDegisti} name="soyisim" placeholder="Soyisim giriniz" value={alanlar.soyisim || ""} />
             </div>
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
@@ -52,7 +64,7 @@ export default function ContactForm(props) {
                             <i className="fas fa-phone"></i>
                         </div>
                     </div>
-                    <input className="form-control" onChange={alanlarDegisti} name="telefon" placeholder="Telefon giriniz" />
+                    <input className="form-control" onChange={alanlarDegisti} name="telefon" placeholder="Telefon giriniz" value={alanlar.telefon || ""} />
                 </div>
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
@@ -60,7 +72,7 @@ export default function ContactForm(props) {
                             <i className="fas fa-envelope-square"></i>
                         </div>
                     </div>
-                    <input className="form-control" onChange={alanlarDegisti} name="mail" placeholder="Mail adresi giriniz" />
+                    <input className="form-control" onChange={alanlarDegisti} name="mail" placeholder="Mail adresi giriniz" value={alanlar.mail || ""} />
                 </div>
             </div>
             <div className="form-group">

@@ -5,6 +5,7 @@ import firebaseDB from '../firebase'
 export default function Contact() {
 
     const [iletisimVeriler, setIletisimVeriler] = useState({});
+    const [currentId, setCurrentId] = useState('');
 
     useEffect(() => {
         //get data
@@ -42,7 +43,7 @@ export default function Contact() {
             </div>
             <div className="row">
                 <div className="col-md-5">
-                    <ContactForm ekle={veriEkle} />
+                    <ContactForm {...({ veriEkle, currentId, iletisimVeriler })} />
                 </div>
                 <div className="col-md-7">
                     <table className="table table-borderless table-strip">
@@ -62,7 +63,7 @@ export default function Contact() {
                                         <td>{iletisimVeriler[id].mail}</td>
                                         <td>{iletisimVeriler[id].telefon}</td>
                                         <td>
-                                            <a className="btn text-primary">
+                                            <a className="btn text-primary" onClick={() => setCurrentId(id)}>
                                                 <i className="fas fa-pencil-alt"></i>
                                             </a>
                                             <a className="btn text-primary">
