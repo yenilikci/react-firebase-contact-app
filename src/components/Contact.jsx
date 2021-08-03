@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ContactForm from './ContactForm'
 import firebaseDB from '../firebase'
 
 export default function Contact() {
+
+    const [iletisimVeriler, setIletisimVeriler] = useState({});
+
+    useEffect(() => {
+        //get data
+        firebaseDB.child('iletisim').on('value', snapshot => {
+            if(snapshot.val() != null){
+                setIletisimVeriler({
+                    ...snapshot.val()
+                })
+                console.log(iletisimVeriler);
+            }
+        })
+    }, [])
 
     const veriEkle = nesne => {
         //console.log(nesne);
