@@ -1,10 +1,19 @@
 import React from 'react'
 import ContactForm from './ContactForm'
+import firebaseDB from '../firebase'
 
 export default function Contact() {
 
     const veriEkle = nesne => {
-        console.log(nesne);
+        //console.log(nesne);
+        firebaseDB.child('iletisim').push(
+            nesne,
+            err => {
+                if (err) {
+                    console.log(err);
+                }
+            }
+        )
     }
 
     return (
