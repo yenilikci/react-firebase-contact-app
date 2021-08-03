@@ -22,14 +22,27 @@ export default function Contact() {
     //push data
     const veriEkle = nesne => {
         //console.log(nesne);
-        firebaseDB.child('iletisim').push(
-            nesne,
-            err => {
-                if (err) {
-                    console.log(err);
+        if (currentId == '') {
+            firebaseDB.child('iletisim').push(
+                nesne,
+                err => {
+                    if (err) {
+                        console.log(err);
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            firebaseDB.child(`iletisim/${currentId}`).set(
+                nesne,
+                err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        setCurrentId('')
+                    }
+                }
+            )
+        }
     }
 
     return (
